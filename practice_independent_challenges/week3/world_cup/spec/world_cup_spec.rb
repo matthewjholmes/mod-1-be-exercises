@@ -22,7 +22,7 @@ describe WorldCup do
 
     describe 'initializes with year and teams' do
         it 'is a WorldCup' do 
-            expect(@world_cup.class).to eq WorldCup
+            expect(@world_cup).to be_a WorldCup
         end
 
         it '#year' do
@@ -44,6 +44,7 @@ describe WorldCup do
         end
 
         it 'returns array of players across all teams playing by position' do
+            expect(@world_cup.active_players_by_position("midfielder")).to be_a Array
             expect(@world_cup.active_players_by_position("midfielder")).to match_array [@pogba, @modric]
         end
 
@@ -51,6 +52,27 @@ describe WorldCup do
             @croatia.eliminate
 
             expect(@world_cup.active_players_by_position("midfielder")).to match_array [@pogba]
+        end
+    end
+
+    describe '#all_players_by_position' do 
+        it 'returns a hash with string keys and arrays of Player objects as values' do
+            expect(@world_cup.all_players_by_position).to be_a Hash
+            @world_cup.all_players_by_position.each do |k,v|
+                expect(k).to be_a String
+                expect(v).to be_a Array
+                expect(v.sample).to be_a Player
+            end
+        end
+
+        it 'assigns correct players to the hash' do 
+            players = {
+                'forward' => [@mbappe],
+                'midfielder' => [@pogba, @modric],
+                'defender' => [@vida]
+            }
+
+            expect(@world_cup.all_players_by_position).to match players
         end
     end
 end

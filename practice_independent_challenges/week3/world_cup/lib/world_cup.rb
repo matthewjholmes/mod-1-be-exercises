@@ -18,4 +18,15 @@ class WorldCup
             team.players_by_position(position)
         end
     end
+
+    def all_players_by_position
+        all_players = {}
+        @teams.each do |team|
+            team.players.each do |player|
+                all_players[player.position] ||= []
+                all_players[player.position] << player
+            end
+        end
+        all_players
+    end
 end
