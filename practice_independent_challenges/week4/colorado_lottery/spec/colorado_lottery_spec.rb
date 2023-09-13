@@ -53,7 +53,7 @@ describe ColoradoLottery do
             # expect(@lottery.registered_contestants).to eq {}
 
             expect(@lottery.winners).to eq []
-            
+
             expect(@lottery.current_contestants).to be_a Hash
             expect(@lottery.current_contestants.empty?).to eq true
             # expect(@lottery.current_contestants).to eq {}
@@ -81,6 +81,15 @@ describe ColoradoLottery do
             expect(@lottery.can_register?(@alexander, @cash_5)).to eq false
             expect(@lottery.can_register?(@benjamin, @mega_millions)).to eq false
             expect(@lottery.can_register?(@frederick, @cash_5)).to eq false
+        end
+    end
+
+    describe '#register_contestant' do
+        # Instructions for this method indicate that the return should be a Contestant, 
+        # but then Im not sure what the purpose of the method is. Given that registered_contestants is a hash, 
+        # I will assume this method should populate that hash
+        it 'populates @registered_contestants with all game interests as keys if ncessary' do 
+            # expect(@lottery.registered_contestants).to eq {}
         end
     end
 end
